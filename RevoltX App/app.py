@@ -14,7 +14,7 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev_key")
 
-DB_FILE = 'database.json'
+DB_FILE = "database.json"
 TRACKER_API_KEY = '9ceb62c2-1b22-4819-836f-fb980fe0b53a'
 
 # ─── DB helpers ───────────────────────────────────────────────
