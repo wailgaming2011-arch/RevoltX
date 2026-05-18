@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Team — RevoltX{% endblock %}
+{% block extra_css %}
+<style>
+.page-hero{padding:6rem 2rem 3rem;text-align:center;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(245,196,0,.1),transparent 70%);}
+.page-hero h1{font-family:'Orbitron';font-weight:900;font-size:2.2rem;color:var(--white);margin-bottom:.5rem;}
+.page-hero h1 span{color:var(--red);}
+.page-hero p{color:var(--text2);}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:900px;margin:0 auto;padding:2rem 2rem 5rem;}
+.player-full{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:2rem;display:flex;gap:1.5rem;align-items:flex-start;transition:all .3s;position:relative;overflow:hidden;}
+.player-full::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--red),transparent);opacity:0;transition:opacity .3s;}
+.player-full:hover{border-color:var(--border);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.4);}
+.player-full:hover::before{opacity:1;}
+.pf-avatar{width:72px;height:72px;flex-shrink:0;background:linear-gradient(135deg,var(--red-dark),#1a1500);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;border:2px solid var(--border);box-shadow:0 0 20px rgba(245,196,0,.2);}
+.pf-info h3{font-family:'Orbitron';font-weight:700;font-size:1.1rem;color:var(--white);}
+.pf-role{color:var(--text2);font-size:.9rem;margin:.2rem 0;}
+.pf-game{display:inline-block;background:rgba(245,196,0,.1);border:1px solid rgba(245,196,0,.2);color:var(--red);font-size:.75rem;font-weight:700;padding:.15rem .5rem;border-radius:3px;}
+.pf-epic{font-size:.8rem;color:var(--text2);margin-top:.4rem;}
+.pf-epic b{color:#60a5fa;}
+.pf-stats{display:flex;gap:1rem;margin-top:1rem;}
+.pf-stat{text-align:center;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:.6rem .8rem;}
+.pf-stat .v{font-family:'Orbitron';font-weight:700;font-size:1.1rem;color:var(--white);}
+.pf-stat .l{font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;}
+@media(max-width:700px){.team-grid{grid-template-columns:1fr;}.player-full{flex-direction:column;align-items:center;text-align:center;}}
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-hero">
+  <div class="section-tag" style="display:inline-block;margin-bottom:1rem">Roster officiel</div>
+  <h1>NOTRE <span>TEAM</span></h1>
+  <p>Les joueurs qui représentent RevoltX en compétition</p>
+</div>
+<div class="team-grid">
+  {% for p in team %}
+  <div class="player-full">
+    <div class="pf-avatar">{{ p.avatar }}</div>
+    <div class="pf-info">
+      <h3>{{ p.name }}</h3>
+      <div class="pf-role">{{ p.role }}</div>
+      <span class="pf-game">{{ p.game }}</span>
+      <div class="pf-epic">Epic: <b>{{ p.epic }}</b></div>
+      <div class="pf-stats">
+        <div class="pf-stat"><div class="v">{{ p.wins }}</div><div class="l">Wins</div></div>
+        <div class="pf-stat"><div class="v">{{ p.kd }}</div><div class="l">K/D</div></div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

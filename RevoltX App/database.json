@@ -1,0 +1,282 @@
+{
+  "users": [
+    {
+      "id": "9f0059e0-6ac2-4b63-acb8-ab8a084e2ff0",
+      "username": "Swaill",
+      "email": "WAILgaming2011@gmail.com",
+      "password": "scrypt:32768:8:1$MxM6IkYOjmRHYCYs$df2e76b3b5d6152f456be101b37556f2d8417446fc1e974e0fed010f667c3010438e41774b13adcd730cd4777c2b1c37c7ec412ebdfa046a88b197b0d68ee3e2",
+      "is_admin": true,
+      "epic_username": "RvX Swaill",
+      "epic_game": "Fortnite",
+      "epic_stats": {},
+      "joined": "2026-03-18",
+      "avatar": "S"
+    }
+  ],
+  "news": [
+    {
+      "id": 5,
+      "title": "je suis gayyyyy",
+      "content": "arazerzdfzdfzfz gayyyyyyyyyyyyyy",
+      "date": "2026-05-06",
+      "category": "Organisation",
+      "author": "Swaill",
+      "image": "pipi"
+    },
+    {
+      "id": 4,
+      "title": "Nouvelle Competition R\u00e9ussite",
+      "content": "1er place au FNCS Div1",
+      "date": "2026-03-18",
+      "category": "Comp\u00e9tition",
+      "author": "Swaill",
+      "image": "\ud83d\udcf0"
+    },
+    {
+      "id": 1,
+      "title": "RevoltX rejoint la scene competitive FR",
+      "content": "Notre organisation est fiere d annoncer son entree officielle dans le circuit professionnel francais de Fortnite et Valorant.",
+      "date": "2024-03-15",
+      "category": "Organisation",
+      "author": "Admin",
+      "image": "\u2605"
+    },
+    {
+      "id": 2,
+      "title": "Tryouts ouverts - Saison 3",
+      "content": "Vous revez de jouer pour RevoltX ? Les candidatures sont maintenant ouvertes. Connectez votre compte Epic Games et soumettez votre candidature.",
+      "date": "2024-03-10",
+      "category": "Recrutement",
+      "author": "Staff",
+      "image": "\u25c6"
+    },
+    {
+      "id": 3,
+      "title": "Victoire au tournoi Paris Open",
+      "content": "Notre roster Fortnite remporte le Paris Open avec un score parfait en phase de groupes. Felicitations a toute l equipe !",
+      "date": "2024-03-05",
+      "category": "Competition",
+      "author": "Staff",
+      "image": "\u25b2"
+    }
+  ],
+  "applications": [
+    {
+      "id": "3c607f23-5aff-4ece-ac33-fb621e563238",
+      "user_id": "9f0059e0-6ac2-4b63-acb8-ab8a084e2ff0",
+      "username": "Swaill",
+      "game": "Fortnite",
+      "role": "Fragger",
+      "message": "JE SUIS GAY",
+      "epic_username": "RvX Swaill",
+      "epic_stats": {},
+      "status": "Refuse",
+      "date": "2026-03-19"
+    },
+    {
+      "id": "3e8749d6-9f54-43d8-83fb-bc3cf7eadc5b",
+      "user_id": "9f0059e0-6ac2-4b63-acb8-ab8a084e2ff0",
+      "username": "Swaill",
+      "game": "Fortnite",
+      "role": "Fragger",
+      "message": "fez\u00e7ihnhajf",
+      "epic_username": "RvX Swaill",
+      "epic_stats": {},
+      "status": "Refuse",
+      "date": "2026-03-19"
+    },
+    {
+      "id": "0531f128-2a3d-480c-8323-f2f6c92f4b9d",
+      "user_id": "9f0059e0-6ac2-4b63-acb8-ab8a084e2ff0",
+      "username": "Swaill",
+      "game": "Fortnite",
+      "role": "Fragger",
+      "message": "caca",
+      "epic_username": "RvX Swaill",
+      "epic_stats": {},
+      "status": "Refuse",
+      "date": "2026-03-19"
+    },
+    {
+      "id": "f8bfd33b-7198-4c81-801b-24138f431480",
+      "user_id": "9f0059e0-6ac2-4b63-acb8-ab8a084e2ff0",
+      "username": "Swaill",
+      "game": "Valorant",
+      "role": "Fragger",
+      "message": "zd",
+      "epic_username": "RvX Swaill",
+      "epic_stats": {},
+      "status": "Refuse",
+      "date": "2026-03-20"
+    },
+    {
+      "id": "a8ecd40b-ee53-4acc-83e9-0f4306e1d2f4",
+      "user_id": "9f0059e0-6ac2-4b63-acb8-ab8a084e2ff0",
+      "username": "Swaill",
+      "game": "Valorant",
+      "role": "IGL",
+      "message": "je suis devoue",
+      "epic_username": "RvX Swaill",
+      "epic_stats": {},
+      "status": "Refuse",
+      "date": "2026-03-28"
+    },
+    {
+      "id": "15cbd45e-60a3-4078-8829-b2b67880a89e",
+      "user_id": "9f0059e0-6ac2-4b63-acb8-ab8a084e2ff0",
+      "username": "Swaill",
+      "game": "Fortnite",
+      "role": "IGL",
+      "message": "zfezgsfghsfg",
+      "epic_username": "RvX Swaill",
+      "epic_stats": {},
+      "status": "Refuse",
+      "date": "2026-05-06"
+    },
+    {
+      "id": "14c1c424-73c0-4c21-9698-8a763fb47903",
+      "user_id": "9f0059e0-6ac2-4b63-acb8-ab8a084e2ff0",
+      "username": "Swaill",
+      "game": "Valorant",
+      "role": "Flex",
+      "message": "SAPHIR MA TANA",
+      "epic_username": "RvX Swaill",
+      "epic_stats": {},
+      "status": "Refuse",
+      "date": "2026-05-10"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Maillot RevoltX Home 2024",
+      "price": 59.99,
+      "stock": 42,
+      "category": "Maillots",
+      "color": "#f5c400",
+      "image": "M",
+      "desc": "Maillot officiel domicile, tissu respirant haute performance."
+    },
+    {
+      "id": 2,
+      "name": "Maillot RevoltX Away 2024",
+      "price": 59.99,
+      "stock": 28,
+      "category": "Maillots",
+      "color": "#1d3557",
+      "image": "M",
+      "desc": "Maillot exterieur edition limitee, design exclusif."
+    },
+    {
+      "id": 3,
+      "name": "Hoodie RevoltX Logo",
+      "price": 74.99,
+      "stock": 15,
+      "category": "Vetements",
+      "color": "#2d2d2d",
+      "image": "H",
+      "desc": "Hoodie premium brode, confort maximal."
+    },
+    {
+      "id": 4,
+      "name": "Casquette RevoltX Snapback",
+      "price": 29.99,
+      "stock": 60,
+      "category": "Accessoires",
+      "color": "#f5c400",
+      "image": "C",
+      "desc": "Snapback ajustable, broderie 3D haute qualite."
+    },
+    {
+      "id": 5,
+      "name": "Tapis de souris XL RevoltX",
+      "price": 24.99,
+      "stock": 80,
+      "category": "Gaming",
+      "color": "#2d2d2d",
+      "image": "T",
+      "desc": "Surface optimisee 90x40cm, base antiderapante."
+    },
+    {
+      "id": 6,
+      "name": "Pack Fan Kit 2024",
+      "price": 99.99,
+      "stock": 10,
+      "category": "Packs",
+      "color": "#f5c400",
+      "image": "P",
+      "desc": "Maillot + Casquette + Tapis de souris, edition collector."
+    }
+  ],
+  "competitions": [
+    {
+      "id": 1,
+      "name": "Paris Open 2024",
+      "game": "Fortnite",
+      "date": "2024-03-05",
+      "result": "1er place",
+      "prize": "5,000 EUR",
+      "status": "Termine"
+    },
+    {
+      "id": 2,
+      "name": "France Esport Cup",
+      "game": "Valorant",
+      "date": "2024-04-20",
+      "result": "-",
+      "prize": "10,000 EUR",
+      "status": "A venir"
+    },
+    {
+      "id": 3,
+      "name": "RevoltX Invitational",
+      "game": "Fortnite",
+      "date": "2024-05-10",
+      "result": "-",
+      "prize": "2,500 EUR",
+      "status": "En cours"
+    }
+  ],
+  "team": [
+    {
+      "id": 1,
+      "name": "ShadowX",
+      "role": "IGL / Fragger",
+      "game": "Fortnite",
+      "avatar": "S",
+      "wins": 142,
+      "kd": 3.8,
+      "epic": "ShadowX_RVX"
+    },
+    {
+      "id": 2,
+      "name": "NeonKill",
+      "role": "Support",
+      "game": "Fortnite",
+      "avatar": "N",
+      "wins": 98,
+      "kd": 2.9,
+      "epic": "NeonKill_RVX"
+    },
+    {
+      "id": 3,
+      "name": "VortexAim",
+      "role": "Entry Fragger",
+      "game": "Valorant",
+      "avatar": "V",
+      "wins": 211,
+      "kd": 4.1,
+      "epic": "VortexAim_RVX"
+    },
+    {
+      "id": 4,
+      "name": "IceSniper",
+      "role": "AWPer",
+      "game": "Valorant",
+      "avatar": "I",
+      "wins": 176,
+      "kd": 3.5,
+      "epic": "IceSniper_RVX"
+    }
+  ]
+}

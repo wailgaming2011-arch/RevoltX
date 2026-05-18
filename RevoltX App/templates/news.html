@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Actualités — RevoltX{% endblock %}
+{% block extra_css %}
+<style>
+.page-hero{padding:6rem 2rem 3rem;text-align:center;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(245,196,0,.1),transparent 70%);}
+.page-hero h1{font-family:'Orbitron';font-weight:900;font-size:2.2rem;color:var(--white);margin-bottom:.5rem;}
+.page-hero h1 span{color:var(--red);}
+.page-hero p{color:var(--text2);}
+.news-section{padding:2rem 2rem 5rem;max-width:900px;margin:0 auto;}
+.news-full{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:2rem;margin-bottom:1.5rem;display:flex;gap:1.5rem;transition:all .3s;}
+.news-full:hover{border-color:var(--border);box-shadow:0 8px 30px rgba(0,0,0,.4);}
+.n-emoji{font-size:3rem;flex-shrink:0;}
+.n-cat{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem;}
+.news-full h3{font-family:'Rajdhani';font-weight:700;font-size:1.2rem;color:var(--white);margin-bottom:.6rem;}
+.news-full p{color:var(--text2);font-size:.9rem;line-height:1.7;}
+.n-meta{display:flex;gap:1.5rem;font-size:.8rem;color:var(--text2);margin-top:1rem;}
+@media(max-width:600px){.news-full{flex-direction:column;}}
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-hero">
+  <div class="section-tag" style="display:inline-block;margin-bottom:1rem">Actualités</div>
+  <h1>DERNIÈRES <span>NEWS</span></h1>
+  <p>Toute l'actualité de RevoltX Esport</p>
+</div>
+<div class="news-section">
+  {% for article in news %}
+  <div class="news-full">
+    <div class="n-emoji">{{ article.image }}</div>
+    <div>
+      <div class="n-cat">{{ article.category }}</div>
+      <h3>{{ article.title }}</h3>
+      <p>{{ article.content }}</p>
+      <div class="n-meta">
+        <span>✍ {{ article.author }}</span>
+        <span>📅 {{ article.date }}</span>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

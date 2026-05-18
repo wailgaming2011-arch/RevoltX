@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}RevoltX Esport{% endblock %}</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #f5c400;
+  --red-dark: #c49a00;
+  --red-glow: rgba(245,196,0,0.4);
+  --bg: #080808;
+  --bg2: #0d0d0d;
+  --bg3: #111111;
+  --card: #111111;
+  --card2: #181818;
+  --border: rgba(245,196,0,0.2);
+  --border2: rgba(255,255,255,0.06);
+  --text: #f0e8d0;
+  --text2: #9a8a6a;
+  --text3: #5555777;
+  --white: #ffffff;
+  --gold: #ffd60a;
+  --green: #06d6a0;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── Noise texture overlay ── */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+  opacity:.4;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed;
+  top:0; left:0; right:0;
+  z-index: 1000;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display:flex; align-items:center; gap:.75rem;
+  text-decoration:none;
+}
+
+.nav-logo .logo-icon {
+  width:36px; height:36px;
+  background: var(--red);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px;
+  box-shadow: 0 0 20px var(--red-glow);
+  animation: pulse-logo 3s ease-in-out infinite;
+}
+
+@keyframes pulse-logo {
+  0%,100% { box-shadow: 0 0 20px var(--red-glow); }
+  50% { box-shadow: 0 0 40px var(--red-glow), 0 0 80px rgba(245,196,0,0.2); }
+}
+
+.nav-logo span {
+  font-family: 'Orbitron', monospace;
+  font-weight:900;
+  font-size:1.2rem;
+  color: var(--white);
+  letter-spacing:.15em;
+}
+
+.nav-logo span b { color: var(--red); }
+
+.nav-links {
+  display:flex; align-items:center; gap:.25rem;
+  list-style:none;
+}
+
+.nav-links a {
+  color: var(--text2);
+  text-decoration:none;
+  font-family:'Rajdhani', sans-serif;
+  font-weight:600;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding: .5rem .9rem;
+  border-radius:4px;
+  transition: all .2s;
+  position: relative;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--white);
+  background: rgba(245,196,0,0.1);
+}
+
+.nav-links a.active::after {
+  content:'';
+  position:absolute;
+  bottom:-1px; left:50%; transform:translateX(-50%);
+  width:20px; height:2px;
+  background: var(--red);
+  border-radius:2px;
+}
+
+.nav-right { display:flex; align-items:center; gap:.75rem; }
+
+.nav-user {
+  display:flex; align-items:center; gap:.6rem;
+  font-size:.85rem; font-weight:600;
+  color: var(--text2);
+}
+
+.avatar-circle {
+  width:32px; height:32px;
+  background: linear-gradient(135deg, var(--red), var(--red-dark));
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Orbitron'; font-weight:700; font-size:.75rem;
+  color:#fff;
+  box-shadow: 0 0 12px var(--red-glow);
+}
+
+.btn {
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.5rem 1.2rem;
+  border-radius:4px;
+  font-family:'Rajdhani'; font-weight:700;
+  font-size:.85rem; letter-spacing:.08em; text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer; border:none;
+  transition: all .2s;
+}
+
+.btn-red {
+  background: var(--red);
+  color:#fff;
+  box-shadow: 0 0 20px rgba(245,196,0,0.3);
+}
+.btn-red:hover {
+  background: #f7d000;
+  box-shadow: 0 0 30px rgba(245,196,0,0.5);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+.btn-outline:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.btn-ghost { background:transparent; color:var(--text2); }
+.btn-ghost:hover { color:var(--white); }
+
+/* ── Layout ── */
+main {
+  padding-top: 64px;
+  min-height: 100vh;
+}
+
+.container { max-width:1200px; margin:0 auto; padding:0 2rem; }
+
+/* ── Section headers ── */
+.section-header {
+  display:flex; align-items:center; gap:1rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-header h2 {
+  font-family:'Orbitron'; font-weight:700;
+  font-size:1.5rem; letter-spacing:.1em;
+  text-transform:uppercase;
+  color: var(--white);
+}
+
+.section-line {
+  flex:1;
+  height:1px;
+  background: linear-gradient(to right, var(--red), transparent);
+}
+
+.section-tag {
+  font-size:.75rem; font-weight:700; letter-spacing:.15em;
+  text-transform:uppercase;
+  color: var(--red);
+  background: rgba(245,196,0,0.1);
+  border: 1px solid rgba(245,196,0,0.3);
+  padding:.2rem .6rem;
+  border-radius:3px;
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all .3s;
+  position:relative;
+}
+
+.card:hover {
+  border-color: var(--border);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+.card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+  background: linear-gradient(to right, var(--red), transparent);
+  opacity:0;
+  transition: opacity .3s;
+}
+.card:hover::before { opacity:1; }
+
+/* ── Alerts / Flash ── */
+.flash-messages {
+  position:fixed; top:80px; right:1.5rem; z-index:999;
+  display:flex; flex-direction:column; gap:.5rem;
+}
+
+.flash {
+  padding:.75rem 1.2rem;
+  border-radius:6px;
+  font-weight:600; font-size:.9rem;
+  display:flex; align-items:center; gap:.5rem;
+  animation: slide-in .3s ease;
+  max-width: 360px;
+}
+
+@keyframes slide-in {
+  from { transform:translateX(100px); opacity:0; }
+  to { transform:translateX(0); opacity:1; }
+}
+
+.flash.success { background:#06d6a020; border:1px solid #06d6a060; color:#06d6a0; }
+.flash.error { background:#f5c40020; border:1px solid #f5c40060; color:#f5c400; }
+
+/* ── Footer ── */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border2);
+  padding: 3rem 2rem 2rem;
+  margin-top: 6rem;
+}
+
+.footer-inner {
+  max-width:1200px; margin:0 auto;
+  display:grid; grid-template-columns: 1fr 1fr 1fr;
+  gap:3rem;
+}
+
+.footer-brand h3 {
+  font-family:'Orbitron'; font-weight:900;
+  color:var(--white); font-size:1.1rem; letter-spacing:.15em;
+  margin-bottom:.75rem;
+}
+.footer-brand h3 b { color:var(--red); }
+.footer-brand p { color:var(--text2); font-size:.9rem; line-height:1.6; }
+
+.footer-links h4 {
+  font-weight:700; font-size:.8rem; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--text2);
+  margin-bottom:1rem;
+}
+.footer-links a {
+  display:block; color:var(--text2);
+  text-decoration:none; font-size:.9rem;
+  margin-bottom:.4rem; transition:color .2s;
+}
+.footer-links a:hover { color:var(--red); }
+
+.footer-bottom {
+  max-width:1200px; margin:2rem auto 0;
+  padding-top:1.5rem;
+  border-top:1px solid var(--border2);
+  display:flex; justify-content:space-between; align-items:center;
+  color:var(--text2); font-size:.8rem;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--red-dark); border-radius:3px; }
+
+/* ── Status badges ── */
+.badge {
+  display:inline-flex; align-items:center;
+  padding:.2rem .6rem;
+  border-radius:20px;
+  font-size:.75rem; font-weight:700; letter-spacing:.05em;
+}
+
+.badge-pending { background:rgba(255,214,10,.1); color:#ffd60a; border:1px solid rgba(255,214,10,.3); }
+.badge-accepted { background:rgba(6,214,160,.1); color:#06d6a0; border:1px solid rgba(6,214,160,.3); }
+.badge-rejected { background:rgba(245,196,0,.1); color:#f5c400; border:1px solid rgba(245,196,0,.3); }
+.badge-upcoming { background:rgba(67,97,238,.1); color:#4361ee; border:1px solid rgba(67,97,238,.3); }
+
+/* ── Grid helpers ── */
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+.grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+
+@media(max-width:900px) {
+  .grid-3,.grid-4 { grid-template-columns:repeat(2,1fr); }
+  .footer-inner { grid-template-columns:1fr; gap:2rem; }
+  .nav-links { display:none; }
+}
+@media(max-width:600px) {
+  .grid-3,.grid-4,.grid-2 { grid-template-columns:1fr; }
+}
+</style>
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="flash-messages">
+    {% for category, message in messages %}
+    <div class="flash {{ category }}">
+      {% if category == 'success' %}✓{% else %}⚠{% endif %} {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="/static/logo.jpg" alt="RevoltX" style="height:44px;width:auto;"><span style="font-family:Orbitron,sans-serif;font-weight:900;font-size:1.1rem;color:#fff;letter-spacing:.15em;margin-left:.6rem">REVOLT<b style="color:#f5c400">X</b></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/" class="{% if request.endpoint=='index' %}active{% endif %}">Accueil</a></li>
+    <li><a href="/team" class="{% if request.endpoint=='team' %}active{% endif %}">Team</a></li>
+    <li><a href="/competitions" class="{% if request.endpoint=='competitions' %}active{% endif %}">Compétitions</a></li>
+    <li><a href="/shop" class="{% if request.endpoint=='shop' %}active{% endif %}">Boutique</a></li>
+    <li><a href="/news" class="{% if request.endpoint=='news' %}active{% endif %}">News</a></li>
+    {% if session.user_id %}
+    <li><a href="/apply" class="{% if request.endpoint=='apply' %}active{% endif %}">Candidater</a></li>
+    {% if session.is_admin %}
+    <li><a href="/admin" class="{% if request.endpoint=='admin' %}active{% endif %}" style="color:var(--red)">Admin</a></li>
+    {% endif %}
+    {% endif %}
+  </ul>
+  <div class="nav-right">
+    {% if session.user_id %}
+    <div class="nav-user">
+      <a href="/profile" style="display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--text2)">
+        <div class="avatar-circle">{{ session.username[0].upper() }}</div>
+        <span>{{ session.username }}</span>
+      </a>
+    </div>
+    <a href="/logout" class="btn btn-ghost">Déconnexion</a>
+    {% else %}
+    <a href="/login" class="btn btn-outline">Se connecter</a>
+    <a href="/register" class="btn btn-red">S'inscrire</a>
+    {% endif %}
+  </div>
+</nav>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>REVOLT<b>X</b></h3>
+      <p>Organisation esport française compétitive.<br>Fortnite · Valorant · Et plus encore.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navigation</h4>
+      <a href="/">Accueil</a>
+      <a href="/team">Notre Team</a>
+      <a href="/competitions">Compétitions</a>
+      <a href="/shop">Boutique</a>
+    </div>
+    <div class="footer-links">
+      <h4>Organisation</h4>
+      <a href="/apply">Rejoindre la team</a>
+      <a href="/news">Actualités</a>
+      {% if session.user_id %}<a href="/profile">Mon profil</a>{% endif %}
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 RevoltX Esport. Tous droits réservés.</span>
+    <span style="color:var(--red)">⚡ REVOLTX</span>
+  </div>
+</footer>
+
+<script>
+// Auto-dismiss flash messages
+setTimeout(() => {
+  document.querySelectorAll('.flash').forEach(el => {
+    el.style.transition = 'opacity .4s';
+    el.style.opacity = '0';
+    setTimeout(() => el.remove(), 400);
+  });
+}, 4000);
+</script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

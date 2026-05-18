@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Candidater — RevoltX{% endblock %}
+{% block extra_css %}
+<style>
+.apply-page{padding:6rem 2rem 4rem;max-width:700px;margin:0 auto;}
+.apply-header{text-align:center;margin-bottom:3rem;}
+.apply-header h1{font-family:'Orbitron';font-weight:900;font-size:2rem;color:var(--white);margin-bottom:.5rem;}
+.apply-header h1 span{color:var(--red);}
+.apply-header p{color:var(--text2);font-size:1rem;line-height:1.6;}
+.apply-card{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:2.5rem;position:relative;}
+.apply-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--red),transparent);border-radius:12px 12px 0 0;}
+.form-group{margin-bottom:1.5rem;}
+.form-group label{display:block;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:.5rem;}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:.75rem 1rem;color:var(--white);font-family:'Rajdhani';font-size:1rem;font-weight:500;outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(245,196,0,.1);}
+.form-group select option{background:var(--card);}
+.form-group textarea{resize:vertical;min-height:120px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.epic-note{padding:1rem;background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.2);border-radius:8px;margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;font-size:.9rem;color:#93c5fd;}
+.submit-btn{width:100%;background:var(--red);color:#fff;border:none;border-radius:6px;padding:.9rem;font-family:'Orbitron';font-weight:700;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;box-shadow:0 0 20px rgba(245,196,0,.3);}
+.submit-btn:hover{background:#f7d000;box-shadow:0 0 35px rgba(245,196,0,.5);transform:translateY(-1px);}
+.req-list{background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:1.5rem;margin-bottom:2rem;}
+.req-list h3{font-family:'Rajdhani';font-weight:700;color:var(--white);margin-bottom:1rem;font-size:1rem;text-transform:uppercase;letter-spacing:.08em;}
+.req-item{display:flex;align-items:center;gap:.75rem;padding:.5rem 0;border-bottom:1px solid var(--border2);font-size:.9rem;color:var(--text2);}
+.req-item:last-child{border-bottom:none;}
+.req-item .check{color:var(--red);}
+</style>
+{% endblock %}
+{% block content %}
+<div class="apply-page">
+  <div class="apply-header">
+    <h1>Rejoins <span>RevoltX</span></h1>
+    <p>Tu penses avoir le niveau ? Dépose ta candidature et notre staff examinera ton profil et tes stats.</p>
+  </div>
+  <div class="req-list">
+    <h3>Prérequis</h3>
+    <div class="req-item"><span class="check">⚡</span> Être sérieux et disponible pour les entraînements</div>
+    <div class="req-item"><span class="check">⚡</span> Avoir un compte Epic Games actif</div>
+    <div class="req-item"><span class="check">⚡</span> Être âgé de 15 ans minimum</div>
+    <div class="req-item"><span class="check">⚡</span> Avoir un bon niveau compétitif</div>
+  </div>
+  {% if user.epic_stats %}
+  <div class="epic-note"><span>🎮</span> Tes stats Epic Games (<b>{{ user.epic_username }}</b>) seront automatiquement jointes à ta candidature.</div>
+  {% else %}
+  <div class="epic-note"><span>💡</span><span>Connecte ton <a href="/profile" style="color:#60a5fa">compte Epic Games</a> pour renforcer ta candidature !</span></div>
+  {% endif %}
+  <div class="apply-card">
+    <form method="post" action="/apply">
+      <div class="form-row">
+        <div class="form-group"><label>Jeu</label><select name="game" required><option value="">Choisir...</option><option value="Fortnite">Fortnite</option><option value="Valorant">Valorant</option><option value="CS2">CS2</option><option value="Rocket League">Rocket League</option></select></div>
+        <div class="form-group"><label>Rôle</label><select name="role" required><option value="">Choisir...</option><option value="IGL">IGL</option><option value="Fragger">Entry Fragger</option><option value="Support">Support</option><option value="Sniper">AWPer / Sniper</option><option value="Flex">Flex</option></select></div>
+      </div>
+      <div class="form-group"><label>Pseudo Epic Games</label><input type="text" name="epic_username" placeholder="TonPseudoEpic" value="{{ user.epic_username or '' }}"></div>
+      <div class="form-group"><label>Présente-toi / Pourquoi RevoltX ?</label><textarea name="message" placeholder="Parle-nous de toi, de ton expérience..." required></textarea></div>
+      <button type="submit" class="submit-btn">Envoyer ma candidature 🎯</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

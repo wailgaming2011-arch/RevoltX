@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}Mon Profil — RevoltX{% endblock %}
+{% block extra_css %}
+<style>
+.profile-page{padding:6rem 2rem 4rem;max-width:900px;margin:0 auto;}
+.profile-header{display:flex;align-items:center;gap:2rem;padding:2rem;margin-bottom:2rem;background:var(--card);border:1px solid var(--border2);border-radius:12px;position:relative;overflow:hidden;}
+.profile-header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--red),transparent);}
+.profile-avatar{width:80px;height:80px;background:linear-gradient(135deg,var(--red),var(--red-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron';font-weight:900;font-size:2rem;color:#fff;box-shadow:0 0 30px var(--red-glow);flex-shrink:0;}
+.profile-info h2{font-family:'Orbitron';font-weight:700;font-size:1.4rem;color:var(--white);}
+.p-email{color:var(--text2);font-size:.9rem;margin:.2rem 0 .5rem;}
+.profile-badges{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;}
+.epic-section{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:2rem;margin-bottom:2rem;}
+.epic-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;}
+.epic-icon{width:40px;height:40px;background:linear-gradient(135deg,#c49a00,#f5c400);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:#000;}
+.epic-header h3{font-family:'Rajdhani';font-weight:700;font-size:1.1rem;color:var(--white);}
+.epic-header p{color:var(--text2);font-size:.85rem;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1rem;}
+.stat-box{background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:1rem;text-align:center;transition:all .2s;}
+.stat-box:hover{border-color:var(--red);}
+.stat-box .s-val{font-family:'Orbitron';font-weight:700;font-size:1.4rem;color:var(--red);}
+.stat-box .s-label{font-size:.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;margin-top:.25rem;}
+.connect-form{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap;}
+.connect-form input{flex:1;min-width:180px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:.7rem 1rem;color:var(--white);font-family:'Rajdhani';font-size:1rem;outline:none;transition:border-color .2s;}
+.connect-form input:focus{border-color:var(--red);}
+.connect-form input::placeholder{color:var(--text2);}
+.connect-form select{background:var(--bg);border:1px solid var(--border2);border-radius:6px;padding:.7rem 1rem;color:var(--white);font-family:'Rajdhani';font-size:1rem;outline:none;transition:border-color .2s;cursor:pointer;}
+.connect-form select:focus{border-color:var(--red);}
+.connect-form select option{background:var(--card);}
+.applications-section{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:2rem;}
+.app-item{display:flex;align-items:center;justify-content:space-between;padding:1rem;background:var(--bg);border:1px solid var(--border2);border-radius:8px;margin-bottom:.75rem;}
+.app-item:last-child{margin-bottom:0;}
+.app-info h4{font-weight:700;color:var(--white);}
+.app-info p{color:var(--text2);font-size:.85rem;margin-top:.2rem;}
+.section-title{font-family:'Rajdhani';font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border2);}
+.tracker-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(245,196,0,.1);border:1px solid rgba(245,196,0,.3);color:var(--red);font-size:.75rem;font-weight:700;padding:.2rem .6rem;border-radius:3px;margin-top:.5rem;}
+.game-tag{display:inline-block;background:rgba(245,196,0,.1);border:1px solid rgba(245,196,0,.2);color:var(--red);font-size:.75rem;font-weight:700;padding:.15rem .5rem;border-radius:3px;margin-left:.5rem;}
+@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+{% endblock %}
+{% block content %}
+<div class="profile-page">
+
+  <!-- Header -->
+  <div class="profile-header">
+    <div class="profile-avatar">{{ user.avatar }}</div>
+    <div class="profile-info">
+      <h2>{{ user.username }}</h2>
+      <p class="p-email">{{ user.email }}</p>
+      <div class="profile-badges">
+        <span class="badge" style="background:rgba(245,196,0,.1);border:1px solid rgba(245,196,0,.3);color:var(--red)">Membre depuis {{ user.joined }}</span>
+        {% if user.is_admin %}<span class="badge" style="background:rgba(245,196,0,.15);border:1px solid rgba(245,196,0,.4);color:var(--red)">★ Admin</span>{% endif %}
+        {% if user.epic_username %}<span class="badge" style="background:rgba(245,196,0,.1);border:1px solid rgba(245,196,0,.3);color:var(--red)">{{ user.epic_game or 'Fortnite' }} connecte</span>{% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Epic / Tracker.gg -->
+  <div class="epic-section">
+    <div class="epic-header">
+      <div class="epic-icon">R</div>
+      <div>
+        <h3>Connexion Tracker.gg</h3>
+        <p>Stats reelles Fortnite & Valorant via tracker.gg</p>
+      </div>
+    </div>
+
+    {% if user.epic_username and user.epic_stats %}
+    <!-- Stats affichees -->
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;padding:.75rem 1rem;background:rgba(245,196,0,.08);border:1px solid rgba(245,196,0,.25);border-radius:8px;">
+      <span style="color:var(--red);font-size:1.2rem">✓</span>
+      <div>
+        <div style="font-weight:700;color:#fff">{{ user.epic_username }} <span class="game-tag">{{ user.epic_game or 'Fortnite' }}</span></div>
+        <div style="font-size:.8rem;color:var(--text2)">Stats synchronisees via tracker.gg</div>
+      </div>
+    </div>
+
+    {% if user.epic_game == 'Valorant' %}
+    <!-- Stats Valorant -->
+    <div class="stats-grid">
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.wins }}</div><div class="s-label">Victoires</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.kd }}</div><div class="s-label">K/D Ratio</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.matches }}</div><div class="s-label">Parties</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.kills }}</div><div class="s-label">Kills</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.winrate }}</div><div class="s-label">Win Rate</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.rank }}</div><div class="s-label">Rang</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.headshots }}</div><div class="s-label">Headshots</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.platform }}</div><div class="s-label">Plateforme</div></div>
+    </div>
+    {% else %}
+    <!-- Stats Fortnite -->
+    <div class="stats-grid">
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.wins }}</div><div class="s-label">Victoires</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.kd }}</div><div class="s-label">K/D Ratio</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.matches }}</div><div class="s-label">Parties</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.kills }}</div><div class="s-label">Kills</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.winrate }}</div><div class="s-label">Win Rate</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.top10 }}</div><div class="s-label">Top 10</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.score }}</div><div class="s-label">Score</div></div>
+      <div class="stat-box"><div class="s-val">{{ user.epic_stats.platform }}</div><div class="s-label">Plateforme</div></div>
+    </div>
+    {% endif %}
+
+    <div class="tracker-badge" style="margin-top:1rem">★ Propulse par tracker.gg</div>
+
+    <!-- Changer de compte -->
+    <form class="connect-form" method="post" action="/connect-epic" style="margin-top:1.5rem">
+      <input type="text" name="epic_username" placeholder="Changer de pseudo..." value="{{ user.epic_username }}">
+      <select name="game">
+        <option value="Fortnite" {% if user.epic_game == 'Fortnite' %}selected{% endif %}>Fortnite</option>
+        <option value="Valorant" {% if user.epic_game == 'Valorant' %}selected{% endif %}>Valorant (nom#tag)</option>
+      </select>
+      <button type="submit" class="btn btn-outline">Mettre a jour</button>
+    </form>
+
+    {% else %}
+    <!-- Pas encore connecte -->
+    <p style="color:var(--text2);margin-bottom:1rem;">Entre ton pseudo pour recuperer tes vraies statistiques depuis tracker.gg.</p>
+    <p style="color:var(--text2);font-size:.85rem;margin-bottom:1.25rem;">Pour Valorant, utilise le format <b style="color:var(--red)">Pseudo#Tag</b> (ex: RevoltX#FR1)</p>
+    <form class="connect-form" method="post" action="/connect-epic">
+      <input type="text" name="epic_username" placeholder="Ton pseudo..." required>
+      <select name="game">
+        <option value="Fortnite">Fortnite</option>
+        <option value="Valorant">Valorant (Pseudo#Tag)</option>
+      </select>
+      <button type="submit" class="btn btn-red">Connecter</button>
+    </form>
+    {% endif %}
+  </div>
+
+  <!-- Candidatures -->
+  <div class="applications-section">
+    <div class="section-title">Mes candidatures</div>
+    {% if applications %}
+      {% for app in applications %}
+      <div class="app-item">
+        <div class="app-info">
+          <h4>{{ app.game }} — {{ app.role }}</h4>
+          <p>Soumise le {{ app.date }}</p>
+        </div>
+        <span class="badge {% if app.status=='En attente' %}badge-pending{% elif app.status=='Accepte' %}badge-accepted{% else %}badge-rejected{% endif %}">{{ app.status }}</span>
+      </div>
+      {% endfor %}
+    {% else %}
+    <div style="text-align:center;padding:2rem;color:var(--text2)">
+      <div style="font-size:2rem;margin-bottom:.5rem">◆</div>
+      Aucune candidature.<br>
+      <a href="/apply" class="btn btn-red" style="margin-top:1rem;display:inline-flex">Candidater maintenant</a>
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

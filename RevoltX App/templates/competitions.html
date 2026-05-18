@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Compétitions — RevoltX{% endblock %}
+{% block extra_css %}
+<style>
+.page-hero{padding:6rem 2rem 3rem;text-align:center;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(245,196,0,.1),transparent 70%);}
+.page-hero h1{font-family:'Orbitron';font-weight:900;font-size:2.2rem;color:var(--white);margin-bottom:.5rem;}
+.page-hero h1 span{color:var(--red);}
+.page-hero p{color:var(--text2);}
+.comp-section{padding:2rem 2rem 5rem;max-width:900px;margin:0 auto;}
+.comp-card{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:1.5rem 2rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:all .3s;}
+.comp-card:hover{border-color:var(--border);transform:translateX(4px);}
+.comp-left h3{font-family:'Rajdhani';font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:.3rem;}
+.comp-meta{display:flex;gap:1.5rem;font-size:.85rem;color:var(--text2);flex-wrap:wrap;}
+.comp-right{text-align:right;}
+.comp-result{font-family:'Orbitron';font-weight:700;font-size:1rem;color:var(--white);margin-bottom:.3rem;}
+.comp-prize{color:var(--gold);font-size:.85rem;font-weight:700;}
+@media(max-width:600px){.comp-card{flex-direction:column;align-items:flex-start;}.comp-right{text-align:left;}}
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-hero">
+  <div class="section-tag" style="display:inline-block;margin-bottom:1rem">Palmarès</div>
+  <h1>COMPÉ<span>TITIONS</span></h1>
+  <p>Nos performances sur la scène compétitive française et internationale</p>
+</div>
+<div class="comp-section">
+  {% for c in competitions %}
+  <div class="comp-card">
+    <div class="comp-left">
+      <h3>{{ c.name }}</h3>
+      <div class="comp-meta">
+        <span>🎮 {{ c.game }}</span>
+        <span>📅 {{ c.date }}</span>
+        <span class="badge {% if c.status=='Terminé' %}badge-accepted{% elif c.status=='À venir' %}badge-upcoming{% else %}badge-pending{% endif %}">{{ c.status }}</span>
+      </div>
+    </div>
+    <div class="comp-right">
+      <div class="comp-result">{{ c.result }}</div>
+      <div class="comp-prize">💰 {{ c.prize }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
