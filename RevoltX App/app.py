@@ -7,12 +7,12 @@ except Exception:
 
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-import json, os, uuid, urllib.request, urllib.error
 from datetime import datetime
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = 'revoltx_secret_2024'
+import os
+app.secret_key = os.environ.get("SECRET_KEY", "dev_key")
 
 DB_FILE = 'database.json'
 TRACKER_API_KEY = '9ceb62c2-1b22-4819-836f-fb980fe0b53a'
