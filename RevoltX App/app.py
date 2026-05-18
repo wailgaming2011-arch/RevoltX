@@ -1,3 +1,4 @@
+import os
 import sys
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -11,7 +12,6 @@ from datetime import datetime
 from functools import wraps
 
 app = Flask(__name__)
-import os
 app.secret_key = os.environ.get("SECRET_KEY", "dev_key")
 
 DB_FILE = 'database.json'
