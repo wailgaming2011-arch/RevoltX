@@ -1,18 +1,18 @@
 import os
 import sys
-try:
-    sys.stdout.reconfigure(encoding="utf-8")
-    sys.stderr.reconfigure(encoding="utf-8")
-except Exception:
-    pass
-
+import json
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from functools import wraps
 
+# ----------------------------
+# App config
+# ----------------------------
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev_key")
+
+DB_FILE = "database.json"
 
 DB_FILE = "database.json"
 TRACKER_API_KEY = '9ceb62c2-1b22-4819-836f-fb980fe0b53a'
